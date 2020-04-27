@@ -57,7 +57,7 @@
                         android:layout_width="@dimen/half_screen"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/dueDate"
+                        android:text="@string/daysTillDue"
                         android:textSize="20sp" />
                 </LinearLayout>
 
