@@ -53,7 +53,7 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/dueDateLabel"
+                        android:id="@+id/daysTillDueLabel"
                         android:layout_width="@dimen/half_screen"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

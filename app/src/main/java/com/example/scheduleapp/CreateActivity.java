@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Date;
-
 public class CreateActivity extends AppCompatActivity {
 
     @Override
@@ -33,10 +31,13 @@ public class CreateActivity extends AppCompatActivity {
         return hoursNum;
     }
 
-    private String getDueDateText() {
-        EditText dueDateText = findViewById(R.id.inputDueDate);
-        String dueDateStr = dueDateText.getText().toString();
-        return dueDateStr;
+    private double getDaysTillDue() {
+        EditText daysTillDueText = findViewById(R.id.inputDaysTillDue);
+        String daysTillDueStr = daysTillDueText.getText().toString();
+        if (daysTillDueStr.isEmpty())
+            daysTillDueStr = "0";
+        double daysTillDueNum = Double.parseDouble(daysTillDueStr);
+        return daysTillDueNum;
     }
 
     public void createTask(View v) {
@@ -48,14 +49,14 @@ public class CreateActivity extends AppCompatActivity {
         String hoursStr = Double.toString(getHours());
         hoursLabel.setText(hoursStr);
 
-        TextView dueDateLabel = findViewById(R.id.inputDueDate);
-        String dueDateStr = getDueDateText();
-        hoursLabel.setText(dueDateStr);
+        TextView daysTillDueLabel = findViewById(R.id.inputDaysTillDue);
+        String daysTillDueStr = Double.toString(getDaysTillDue());
+        hoursLabel.setText(daysTillDueStr);
 
         Intent intent = new Intent(this, TasksActivity.class);
         intent.putExtra("task", taskNameText);
         intent.putExtra("hours", hoursStr);
-        intent.putExtra("dueDate", dueDateStr);
+        intent.putExtra("days", daysTillDueStr);
         startActivity(intent);
     }
 }
