@@ -6,16 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class ScheduleActivity extends AppCompatActivity {
+public class BlockActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
+        setContentView(R.layout.activity_block);
     }
 
-    public void goToBlockTime(View v) {
-        Intent intent = new Intent(this, BlockActivity.class);
+    public void blockTime(View v) {
+        Intent intent = new Intent(this, ScheduleActivity.class);
         startActivity(intent);
     }
 }
