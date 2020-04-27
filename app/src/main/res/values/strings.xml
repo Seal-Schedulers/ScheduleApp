@@ -104,4 +104,7 @@
     <string name="inputStartTime">Start Time</string>
     <string name="inputEndTime">End Time</string>
     <string name="blockButton">Block</string>
+    <string name="task">Task</string>
+    <string name="hours">Hours</string>
+    <string name="dueDate">Due Date</string>
 </resources>
