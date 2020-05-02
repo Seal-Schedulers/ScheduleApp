@@ -24,9 +24,9 @@ public class TasksActivity extends AppCompatActivity {
         TextView hoursLabel = findViewById(R.id.hoursLabel);
         hoursLabel.setText(hoursStr);
 
-        String dueDateStr = intent.getStringExtra("dueDate");
-        TextView dueDateLabel = findViewById(R.id.dueDateLabel);
-        dueDateLabel.setText(dueDateStr);
+        String daysTillDueStr = intent.getStringExtra("days");
+        TextView dueDateLabel = findViewById(R.id.daysTillDueLabel);
+        dueDateLabel.setText(daysTillDueStr);
     }
 
     public void goToCreateTask(View v) {
