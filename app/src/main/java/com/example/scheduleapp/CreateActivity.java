@@ -10,12 +10,17 @@ import android.widget.TextView;
 
 public class CreateActivity extends AppCompatActivity {
 
+    //Here you can put the data. In this case all we need as an ArrayList of String arrays that will hold the tasks.
+    //You can call it TaskHolder or something
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
     }
-
+    //You don't necessarily need these following three methods because although they retrieve the data from the user,
+    //it converts the strings into doubles which isn't needed. Don't delete them yet, just comment them out - we never know, we
+    //might need them later.
     private String getTaskNameText() {
         EditText taskNameText = findViewById(R.id.inputTaskName);
         String taskName = taskNameText.getText().toString();
@@ -31,15 +36,18 @@ public class CreateActivity extends AppCompatActivity {
         return hoursNum;
     }
 
-    private double getDaysTillDue() {
+    private int getDaysTillDue() {
         EditText daysTillDueText = findViewById(R.id.inputDaysTillDue);
         String daysTillDueStr = daysTillDueText.getText().toString();
         if (daysTillDueStr.isEmpty())
             daysTillDueStr = "0";
-        double daysTillDueNum = Double.parseDouble(daysTillDueStr);
+        int daysTillDueNum = Integer.parseInt(daysTillDueStr);
         return daysTillDueNum;
     }
 
+    //As I mentioned above, you shouldn't use the methods above in this method because it makes them from String to double and
+    //all you are doing here is converting them back to String. Instead retrieve them directly as Strings in this method. It
+    //will save the extra step. Create a String array with the name, hours, and daysTillDue and put it in the ArrayList created above.
     public void createTask(View v) {
         TextView taskNameLabel = findViewById(R.id.inputTaskName);
         String taskNameText = getTaskNameText();
@@ -50,7 +58,7 @@ public class CreateActivity extends AppCompatActivity {
         hoursLabel.setText(hoursStr);
 
         TextView daysTillDueLabel = findViewById(R.id.inputDaysTillDue);
-        String daysTillDueStr = Double.toString(getDaysTillDue());
+        String daysTillDueStr = Integer.toString(getDaysTillDue());
         hoursLabel.setText(daysTillDueStr);
 
         Intent intent = new Intent(this, TasksActivity.class);
@@ -58,5 +66,12 @@ public class CreateActivity extends AppCompatActivity {
         intent.putExtra("hours", hoursStr);
         intent.putExtra("days", daysTillDueStr);
         startActivity(intent);
+    }
+
+    //I know I commented a lot... sorry about that hehe. Let me know if I made a mistake somewhere or if you have any questions
+    //about what I said.
+
+    public void scheduleTasks(){
+
     }
 }
