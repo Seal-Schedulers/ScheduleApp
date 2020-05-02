@@ -36,19 +36,18 @@ public class CreateActivity extends AppCompatActivity {
         return hoursNum;
     }
 
-    private double getDaysTillDue() {
+    private int getDaysTillDue() {
         EditText daysTillDueText = findViewById(R.id.inputDaysTillDue);
         String daysTillDueStr = daysTillDueText.getText().toString();
         if (daysTillDueStr.isEmpty())
             daysTillDueStr = "0";
-        double daysTillDueNum = Double.parseDouble(daysTillDueStr);
+        int daysTillDueNum = Integer.parseInt(daysTillDueStr);
         return daysTillDueNum;
     }
 
     //As I mentioned above, you shouldn't use the methods above in this method because it makes them from String to double and
     //all you are doing here is converting them back to String. Instead retrieve them directly as Strings in this method. It
-    //will save the extra step. I'm not sure what the purpose of the Intent is here... it may be doing something that I don't know.
-    //Anyway, create a String Array with the name, hours, and daysTillDue and put it in the ArrayList created above.
+    //will save the extra step. Create a String Array with the name, hours, and daysTillDue and put it in the ArrayList created above.
     public void createTask(View v) {
         TextView taskNameLabel = findViewById(R.id.inputTaskName);
         String taskNameText = getTaskNameText();
@@ -59,7 +58,7 @@ public class CreateActivity extends AppCompatActivity {
         hoursLabel.setText(hoursStr);
 
         TextView daysTillDueLabel = findViewById(R.id.inputDaysTillDue);
-        String daysTillDueStr = Double.toString(getDaysTillDue());
+        String daysTillDueStr = Integer.toString(getDaysTillDue());
         hoursLabel.setText(daysTillDueStr);
 
         Intent intent = new Intent(this, TasksActivity.class);
