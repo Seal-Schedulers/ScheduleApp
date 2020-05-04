@@ -8,10 +8,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CreateActivity extends AppCompatActivity {
 
     //Here you can put the data. In this case all we need as an ArrayList of String arrays that will hold the tasks.
     //You can call it TaskHolder or something
+
+    ArrayList<String[]> TaskHolder = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,9 @@ public class CreateActivity extends AppCompatActivity {
         TextView daysTillDueLabel = findViewById(R.id.inputDaysTillDue);
         String daysTillDueStr = Integer.toString(getDaysTillDue());
         hoursLabel.setText(daysTillDueStr);
+
+        String[] data = new String[]{taskNameText, hoursStr, daysTillDueStr};
+        TaskHolder.add(data);
 
         Intent intent = new Intent(this, TasksActivity.class);
         intent.putExtra("task", taskNameText);
