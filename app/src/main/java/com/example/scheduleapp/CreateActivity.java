@@ -48,7 +48,7 @@ public class CreateActivity extends AppCompatActivity {
     //As I mentioned above, you shouldn't use the methods above in this method because it makes them from String to double and
     //all you are doing here is converting them back to String. Instead retrieve them directly as Strings in this method. It
     //will save the extra step. Create a String array with the name, hours, and daysTillDue and put it in the ArrayList created above.
-    public void createTask(View v) {
+    public void createTemporaryTask(View v) {
         TextView taskNameLabel = findViewById(R.id.inputTaskName);
         String taskNameText = getTaskNameText();
         taskNameLabel.setText(getTaskNameText());
@@ -71,6 +71,8 @@ public class CreateActivity extends AppCompatActivity {
     //I know I commented a lot... sorry about that hehe. Let me know if I made a mistake somewhere or if you have any questions
     //about what I said.
 
+    //In the method below, it will go through the ArrayList of arrays and input them into the createTask from the Controller
+    //class. This will then be saved in the csv files.
     public void scheduleTasks(){
 
     }
