@@ -79,7 +79,6 @@ public class CreateActivity extends AppCompatActivity {
     }
 
     public void removeTask(View v) {
-
         Intent intent = getIntent();
 
         String removeInt = intent.getStringExtra("removeInt");
@@ -95,7 +94,10 @@ public class CreateActivity extends AppCompatActivity {
 
     //In the method below, it will go through the ArrayList of arrays and input them into the createTask from the Controller
     //class. This will then be saved in the csv files.
-    public void scheduleTasks(){
-
+    public void scheduleTasks() throws Exception {
+        Controller aController = (Controller) getApplicationContext();
+        for (String[] data : TaskHolder) {
+            aController.createTask(data[1], Double.valueOf(data[2]), Integer.valueOf(data[3]));
+        }
     }
 }
