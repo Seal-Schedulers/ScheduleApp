@@ -4,4 +4,6 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="half_screen">192dp</dimen>
     <dimen name="third_screen">120dp</dimen>
+    <dimen name="task_name">340dp</dimen>
+    <dimen name="input_number">100dp</dimen>
 </resources>

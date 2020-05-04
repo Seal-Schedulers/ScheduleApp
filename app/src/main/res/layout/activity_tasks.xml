@@ -87,12 +87,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/taskNameLabel"
+                <LinearLayout
+                    android:id="@+id/taskIdentityLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/task"
-                    android:textSize="24sp" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/taskNameLabel"
+                        android:layout_width="@dimen/task_name"
+                        android:layout_height="wrap_content"
+                        android:text="@string/task"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/taskNumberLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/number"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/timeTakenLayout"

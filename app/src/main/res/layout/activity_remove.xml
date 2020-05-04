@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".RemoveActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/removeTaskInstructions"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="@string/removeTaskIntructions"
+            android:textColor="?android:attr/colorForeground"
+            android:textSize="24sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/taskNumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputTaskNumber"
+                android:layout_width="@dimen/input_number"
+                android:layout_height="wrap_content"
+                android:hint="@string/number"
+                android:textAlignment="center"
+                android:textSize="36sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
