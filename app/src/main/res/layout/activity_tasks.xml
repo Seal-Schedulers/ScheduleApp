@@ -27,7 +27,6 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
                 android:onClick="goToCreateTask"
                 android:text="@string/createTaskButton" />
 
@@ -39,7 +38,6 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
                 android:onClick="goToBlockTime"
                 android:text="@string/blockTimeButton" />
 
@@ -51,7 +49,6 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
                 android:onClick="goToRemoveTask"
                 android:text="@string/removeTaskButton" />
         </LinearLayout>
