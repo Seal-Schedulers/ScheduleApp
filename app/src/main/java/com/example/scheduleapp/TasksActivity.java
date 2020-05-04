@@ -34,5 +34,21 @@ public class TasksActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToBlockTime(View v) {
+        Intent intent = new Intent(this, BlockActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToRemoveTask(View v) {
+        Intent intent = new Intent(this, RemoveActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToSchedule(View v) {
+        Intent intent = new Intent(this, ScheduleActivity.class);
+        startActivity(intent);
+    }
+
+
 
 }

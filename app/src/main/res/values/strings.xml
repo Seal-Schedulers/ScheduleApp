@@ -107,4 +107,5 @@
     <string name="task">Task</string>
     <string name="hours">Hours</string>
     <string name="daysTillDue">Days Until Due</string>
+    <string name="removeTaskButton">Remove Task</string>
 </resources>
