@@ -28,7 +28,7 @@ public class TasksActivity extends AppCompatActivity {
         TextView dueDateLabel = findViewById(R.id.daysTillDueLabel);
         dueDateLabel.setText(daysTillDueStr);
 
-        String LookUp = intent.getStringExtra("number");
+        String LookUp = intent.getStringExtra("LookUp");
         TextView taskNumberLabel = findViewById(R.id.taskNumberLabel);
         taskNumberLabel.setText(LookUp);
     }
