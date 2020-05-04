@@ -55,21 +55,12 @@ public class CreateActivity extends AppCompatActivity {
     //all you are doing here is converting them back to String. Instead retrieve them directly as Strings in this method. It
     //will save the extra step. Create a String array with the name, hours, and daysTillDue and put it in the ArrayList created above.
     public void createTemporaryTask(View v) {
-        /*TextView taskNameLabel = findViewById(R.id.inputTaskName);
-        String taskNameText = getTaskNameText();
-        taskNameLabel.setText(getTaskNameText());*/
         EditText taskNameText = findViewById(R.id.inputTaskName);
         String taskName = taskNameText.getText().toString();
 
-        /*TextView hoursLabel = findViewById(R.id.inputHours);
-        String hoursStr = Double.toString(getHours());
-        hoursLabel.setText(hoursStr);*/
         EditText hoursText = findViewById(R.id.inputHours);
         String hoursStr = hoursText.getText().toString();
 
-        /*TextView daysTillDueLabel = findViewById(R.id.inputDaysTillDue);
-        String daysTillDueStr = Integer.toString(getDaysTillDue());
-        hoursLabel.setText(daysTillDueStr);*/
         EditText daysTillDueText = findViewById(R.id.inputDaysTillDue);
         String daysTillDueStr = daysTillDueText.getText().toString();
 
