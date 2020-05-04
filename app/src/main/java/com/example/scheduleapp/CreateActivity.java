@@ -78,12 +78,16 @@ public class CreateActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void removeTask(int i) {
+    public void removeTask(View v) {
 
-        EditText taskNameText = findViewById(R.id.inputTaskName);
-        String taskName = taskNameText.getText().toString();
+        Intent intent = getIntent();
 
-
+        String removeInt = intent.getStringExtra("removeInt");
+        for (int j = 0; j < TaskHolder.size(); j++) {
+            if(TaskHolder.get(j)[0].equals(removeInt)){
+                TaskHolder.remove(j);
+            }
+        }
     }
 
     //I know I commented a lot... sorry about that hehe. Let me know if I made a mistake somewhere or if you have any questions
