@@ -17,8 +17,6 @@ public class CreateActivity extends AppCompatActivity {
 
     ArrayList<String[]> TaskHolder = new ArrayList<>();
 
-    private int lookUp = 1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,18 +62,13 @@ public class CreateActivity extends AppCompatActivity {
         EditText daysTillDueText = findViewById(R.id.inputDaysTillDue);
         String daysTillDueStr = daysTillDueText.getText().toString();
 
-        String LookUp = Integer.toString(lookUp);
-
-        String[] data = new String[]{LookUp,taskName, hoursStr, daysTillDueStr};
-        TaskHolder.add(data);
-        lookUp++;
+        TasksActivity.list.add(new TaskDisplay(taskName, hoursStr, daysTillDueStr));
 
         Intent intent = new Intent(this, TasksActivity.class);
-        intent.putExtra("LookUp", LookUp);
-        intent.putExtra("task", taskName);
-        intent.putExtra("hours", hoursStr);
-        intent.putExtra("days", daysTillDueStr);
         startActivity(intent);
+        //String[] data = new String[]{LookUp,taskName, hoursStr, daysTillDueStr};
+        //TaskHolder.add(data);
+
     }
 
     public void removeTask(View v) {

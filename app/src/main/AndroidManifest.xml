@@ -13,8 +13,10 @@
         <activity android:name=".RemoveActivity"></activity>
         <activity android:name=".BlockActivity" />
         <activity android:name=".CreateActivity" />
-        <activity android:name=".ScheduleActivity" />
-        <activity android:name=".TasksActivity" />
+        <activity android:name=".ScheduleActivity"
+            android:launchMode="singleInstance" />
+        <activity android:name=".TasksActivity"
+            android:launchMode="singleInstance"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
