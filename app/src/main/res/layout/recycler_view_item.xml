@@ -15,7 +15,7 @@
       android:textSize="20sp"
       app:layout_constraintBottom_toTopOf="@id/daysTillDueLabel"
       app:layout_constraintStart_toStartOf="parent"
-      tools:text="@tools:sample/full_names" />
+      tools:text="@string/task" />
 
   <TextView
       android:id="@+id/hoursLabel"
