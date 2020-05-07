@@ -35,9 +35,9 @@ public class TaskDisplayAdapter extends RecyclerView.Adapter<TaskDisplayAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TaskDisplay task = tasksToDisplay.get(position);
 
-        holder.taskNameLabel.setText("Task: " + task.getTaskName().toUpperCase());
+        holder.taskNameLabel.setText(task.getTaskName().toUpperCase());
         holder.hoursStr.setText("Hours: " + task.getHours());
-        holder.daysStr.setText("Days Till Due: " + task.getDays());
+        holder.daysStr.setText("Days Until Due: " + task.getDays());
     }
 
     @Override

@@ -8,8 +8,8 @@
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="498dp"
-        android:layout_height="341dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:dateTextAppearance="@android:style/TextAppearance.Large"
         android:weekDayTextAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         app:layout_constraintBottom_toBottomOf="parent"
