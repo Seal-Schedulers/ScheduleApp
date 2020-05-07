@@ -3,6 +3,8 @@
     <string name="myTasksButton">My Tasks</string>
     <string name="scheduleButton">Schedule</string>
     <string name="title_activity_tasks">TasksActivity</string>
+    <string name="yesStr">Yes</string>
+    <string name="noStr">No</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -108,7 +110,7 @@
     <string name="hours">Hours</string>
     <string name="daysTillDue">Days Until Due</string>
     <string name="number">#</string>
-    <string name="removeTaskButton">Remove Task</string>
+    <string name="CalendarButton">Calendar</string>
     <string name="removeTaskIntructions">Enter the number of the task you want to remove:</string>
     <string name="inputActivityTitle">Activity Title</string>
 </resources>

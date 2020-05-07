@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToSchedule(View v) {
-        Intent intent = new Intent(this, ScheduleActivity.class);
+        Intent intent = new Intent(this, CalendarActivity.class);
         startActivity(intent);
     }
 }

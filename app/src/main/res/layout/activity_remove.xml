@@ -7,39 +7,41 @@
     tools:context=".RemoveActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="360dp"
-        android:layout_marginBottom="589dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/removeTaskInstructions"
-            android:layout_width="279dp"
-            android:layout_height="wrap_content"
-            android:text="@string/removeTaskIntructions"
-            android:textColor="?android:attr/colorForeground"
-            android:textSize="24sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/taskNumber"
+        <EditText
+            android:id="@+id/deleteQuestionLabal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Would you like to delete the task?"
+            android:textAlignment="center" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputTaskNumber"
-                android:layout_width="@dimen/input_number"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/number"
-                android:inputType="number"
-                android:textAlignment="center"
-                android:textSize="36sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_weight="1"
+                android:onClick="yesButton"
+                android:text="@string/yesStr" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="noButton"
+                android:text="@string/noStr" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

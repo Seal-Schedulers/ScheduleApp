@@ -49,12 +49,12 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:onClick="goToRemoveTask"
-                android:text="@string/removeTaskButton" />
+                android:onClick="goToCalendar"
+                android:text="@string/CalendarButton" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/scheduleButton"
+            android:id="@+id/calendarButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

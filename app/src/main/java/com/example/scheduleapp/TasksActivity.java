@@ -6,16 +6,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class TasksActivity extends AppCompatActivity {
+public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapter.OnNoteListener{
 
+    private static final String TAG = "TasksActivity";
     private RecyclerView tasksToDisplay;
-    private RecyclerView.Adapter adapter;
+    static RecyclerView.Adapter adapter;
     static ArrayList<TaskDisplay> list = new ArrayList<TaskDisplay>();
 
     @Override
@@ -24,14 +26,21 @@ public class TasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
 
-        Toast.makeText(getApplicationContext(),"Hello Javatpoint 1",Toast.LENGTH_SHORT).show();
-
         this.tasksToDisplay = (RecyclerView) findViewById(R.id.taskDisplay);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         this.tasksToDisplay.setLayoutManager(mLayoutManager);
 
-        adapter = new TaskDisplayAdapter(list);
+        adapter = new TaskDisplayAdapter(list, this);
         this.tasksToDisplay.setAdapter(adapter);
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+        Log.d(TAG, "onNoteClick: clicked");
+
+        Intent intent = new Intent(this, RemoveActivity.class);
+        intent.putExtra("position", position);
+        startActivity(intent);
     }
 
     public void goToCreateTask(View v) {
@@ -45,12 +54,23 @@ public class TasksActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToRemoveTask(View v) {
-        Intent intent = new Intent(this, RemoveActivity.class);
+    public void goToCalendar(View v) {
+        Intent intent = new Intent(this, CalendarActivity.class);
         startActivity(intent);
     }
 
-    public void goToSchedule(View v) {
+    public void goToSchedule(View v) throws Exception {
+        Controller aController = (Controller) getApplicationContext();
+
+        for(TaskDisplay task: list){
+            aController.createTask(task.getTaskName(), Double.valueOf(task.getHours()), Integer.valueOf(task.getDays()));
+        }
+
+        Toast.makeText(getApplicationContext(), "Scheduled tasks",Toast.LENGTH_LONG).show();
+
+        list.clear();
+        adapter.notifyDataSetChanged();
+
         Intent intent = new Intent(this, ScheduleActivity.class);
         startActivity(intent);
     }
