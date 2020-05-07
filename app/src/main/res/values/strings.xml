@@ -114,4 +114,5 @@
     <string name="CalendarButton">Calendar</string>
     <string name="removeTaskIntructions">Enter the number of the task you want to remove:</string>
     <string name="inputActivityTitle">Activity Title</string>
+    <string name="deleteQuestion">Do you want to delete this task?</string>
 </resources>
