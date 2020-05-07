@@ -14,11 +14,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/deleteQuestionLabal"
+            android:id="@+id/deleteQuestionLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:layout_marginBottom="8dp"
             android:text="@string/deleteQuestion"
             android:textAlignment="center"
             android:textSize="24sp" />
