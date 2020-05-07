@@ -28,6 +28,7 @@ public class CalendarActivity extends AppCompatActivity {
                 intent.putExtra("month", month);
                 intent.putExtra("dayOfMonth", dayOfMonth);
 
+
                 startActivity(intent);
             }
         });
