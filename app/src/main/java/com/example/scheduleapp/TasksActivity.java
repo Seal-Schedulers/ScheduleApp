@@ -45,7 +45,6 @@ public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapt
 
     public void goToCreateTask(View v) {
         Intent intent = new Intent(this, CreateActivity.class);
-        intent.putParcelableArrayListExtra("tasksToDisplay", list);
         startActivity(intent);
     }
 
@@ -62,9 +61,11 @@ public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapt
     public void goToSchedule(View v) throws Exception {
         Controller aController = (Controller) getApplicationContext();
 
-        for(TaskDisplay task: list){
+        /*for(TaskDisplay task: list){
             aController.createTask(task.getTaskName(), Double.valueOf(task.getHours()), Integer.valueOf(task.getDays()));
-        }
+        }*/
+
+        //aController.createTask("math", 3.0, 2);
 
         Toast.makeText(getApplicationContext(), "Scheduled tasks",Toast.LENGTH_LONG).show();
 
@@ -72,6 +73,11 @@ public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapt
         adapter.notifyDataSetChanged();
 
         Intent intent = new Intent(this, ScheduleActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToMain(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

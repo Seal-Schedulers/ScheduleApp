@@ -14,47 +14,38 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/taskEditLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/createTaskButton"
-                android:layout_width="@dimen/third_screen"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_weight="1"
                 android:onClick="goToCreateTask"
                 android:text="@string/createTaskButton" />
 
             <Button
                 android:id="@+id/blockTimeButton"
-                android:layout_width="@dimen/third_screen"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_weight="1"
                 android:onClick="goToBlockTime"
                 android:text="@string/blockTimeButton" />
 
             <Button
-                android:id="@+id/removeTaskButton"
-                android:layout_width="@dimen/third_screen"
+                android:id="@+id/calendarButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_weight="1"
                 android:onClick="goToCalendar"
                 android:text="@string/CalendarButton" />
+
         </LinearLayout>
 
         <Button
-            android:id="@+id/calendarButton"
+            android:id="@+id/scheduleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -105,5 +96,15 @@
         </ScrollView>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="@dimen/half_screen"
+        android:layout_height="wrap_content"
+        android:onClick="goToMain"
+        android:text="@string/homeButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

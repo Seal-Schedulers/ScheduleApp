@@ -95,6 +95,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="homeButton">Home</string>
     <string name="createTaskButton">Create Task</string>
     <string name="inputTaskName">Enter Your Task</string>
     <string name="inputHours">Hours</string>
