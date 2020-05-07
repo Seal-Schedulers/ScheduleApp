@@ -14,11 +14,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/deleteQuestionLabel"
+            android:id="@+id/deleteQuestionLabal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
             android:text="@string/deleteQuestion"
+            android:textAlignment="center"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -30,7 +32,6 @@
                 android:id="@+id/yesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:onClick="yesButton"
                 android:text="@string/yesStr"
@@ -40,7 +41,6 @@
                 android:id="@+id/noButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
                 android:layout_weight="1"
                 android:onClick="noButton"
                 android:text="@string/noStr"
