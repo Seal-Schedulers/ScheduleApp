@@ -31,7 +31,8 @@ public class Controller extends Application {
 	 * @throws Exception 
 	 */
 	public void createTask(String name, double hrs, int daysTillDue) throws Exception {
-		Task task = new Task(name, hrs, daysTillDue, reference, false);
+		LocalDate date = LocalDate.now();
+		Task task = new Task(name, hrs, daysTillDue, reference, date);
 		addTask(task);
 		addToDay(task);
 		System.out.println(reference + " " + tasks.get(reference) + " " + tasks.get(reference).getFifteensPerDay());
@@ -45,7 +46,8 @@ public class Controller extends Application {
 	}
 	
 	public void createBlockTask(String name, Time start, Time end) throws Exception {
-		Task task = new Task(name, start, end, reference, true);
+		LocalDate date = LocalDate.now();
+		Task task = new Task(name, start, end, reference, date);
 		addTask(task);
 		blockTimeInDay(task);
 		System.out.println(reference + " " + tasks.get(reference));

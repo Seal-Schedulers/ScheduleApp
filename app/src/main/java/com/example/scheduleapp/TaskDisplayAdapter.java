@@ -17,7 +17,6 @@ public class TaskDisplayAdapter extends RecyclerView.Adapter<TaskDisplayAdapter.
     private ArrayList<TaskDisplay> tasksToDisplay;
     private OnNoteListener mOnNoteListener;
 
-
     public TaskDisplayAdapter(ArrayList<TaskDisplay> tasksToDisplay, OnNoteListener onNoteListener) {
         this.tasksToDisplay = tasksToDisplay;
         this.mOnNoteListener = onNoteListener;
