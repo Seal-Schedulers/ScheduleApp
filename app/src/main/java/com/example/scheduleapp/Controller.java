@@ -1,6 +1,7 @@
 package com.example.scheduleapp;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.example.scheduleapp.Day;
 import com.example.scheduleapp.Time;
@@ -9,7 +10,23 @@ import com.example.scheduleapp.Task;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Controller extends Application {
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.*;
+
+import com.opencsv.CSVWriter;
+
+public class Controller extends Application{
+
+	//File tasksFile = new File("src\\tasks.csv");
+	//File schedulesFile = new File("src\\schedules.csv");
+	//File blockedtasksFile = new File("src\\blockedtasks.csv");
+
 	// Data
 	private HashMap<Double, Task> tasks;
 	private HashMap<LocalDate, Day> days;
@@ -21,51 +38,48 @@ public class Controller extends Application {
 		tasks = new HashMap<Double, Task>();
 		days = new HashMap<LocalDate, Day>();
 	}
-	
+
 	// Methods
 	/**
-	 * creates a task object using the Task class 
+	 * creates a task object using the Task class
 	 * @param name
 	 * @param hrs
 	 * @param daysTillDue
-	 * @throws Exception 
+	 * @
 	 */
-	public void createTask(String name, double hrs, int daysTillDue) throws Exception {
-		LocalDate date = LocalDate.now();
-		Task task = new Task(name, hrs, daysTillDue, reference, date);
-		addTask(task);
+	public void createTask(String name, double hrs, int daysTillDue, boolean append)   {
+		Log.d("Controller", "about to call LocalDate");
+		LocalDate today = LocalDate.now();
+		Log.d("Controller", "done with LocalDate");
+		Task task = new Task(name, hrs, daysTillDue, reference, today);
+		Log.d("Controller", "going to add to hashmap");
+		tasks.put(reference, task);
+		Log.d("Controller", "done adding to hashmap");
 		addToDay(task);
-		System.out.println(reference + " " + tasks.get(reference) + " " + tasks.get(reference).getFifteensPerDay());
-		//System.out.println(days.get(date).getCollection());
-		//System.out.println(Arrays.toString(days.get(task.getStartDate()).getDay()));
 		reference += 0.1;
 	}
-	
-	private void addTask(Task task) {
+
+	public void createBlockTask(String name, Time start, Time end, boolean append)   {
+		LocalDate today = LocalDate.now();
+		Task task = new Task(name, start, end, reference, today);
 		tasks.put(reference, task);
-	}
-	
-	public void createBlockTask(String name, Time start, Time end) throws Exception {
-		LocalDate date = LocalDate.now();
-		Task task = new Task(name, start, end, reference, date);
-		addTask(task);
 		blockTimeInDay(task);
 		System.out.println(reference + " " + tasks.get(reference));
 		reference += 0.1;
 	}
-	
-	private void blockTimeInDay(Task task) throws Exception {
+
+	private void blockTimeInDay(Task task) {
 		if(!days.containsKey(task.getStartDate())) {
 			Day day = new Day();
 			Time time = new Time(task.getStart());
 			time.increment();
 			for (Time t: Day.allTimes) {
 				if (t.equals(task.getEnd())) {
-					day.addTaskToDay(t, task.getKey());
+					day.replace(t, task.getKey());
 					break;
 				}
 				else if(t.equals(time)) {
-					day.addTaskToDay(t, task.getKey());
+					day.replace(t, task.getKey());
 					time.increment();
 				}
 			}
@@ -73,47 +87,51 @@ public class Controller extends Application {
 		}
 		else {
 			Day day = days.get(task.getStartDate());
+			Day updatedDay = new Day();
 			Time time = new Time(task.getStart());
 			for (Time t: Day.allTimes) {
-				if (t.equals(time)) {
-					if (day.containsKey(t)) {
-						day = replace(day, t, task.getKey());
+				if (t.equals(task.getEnd())) {
+					updatedDay.replace(t, task.getKey());
+					break;
+				}
+				else if(t.equals(time)) {
+					updatedDay.replace(t, task.getKey());
+					time.increment();
+				}
+			}
+			/*Time index = new Time();
+			for (Time t : Day.allTimes) {
+//				System.out.println(t + ", " + index + " " + day);
+				if (updatedDay.getTaskKey(t) == 0) {
+					if (index.equals(new Time(23, 45))) {
+						updatedDay.replace(t, day.getTaskKey(new Time(index)));
+						break;
 					}
 					else {
-						day.addTaskToDay(t, task.getKey());
+					//System.out.println("day " + day.getTaskKey(index));
+						updatedDay.replace(t, day.getTaskKey(new Time (index)));
+						//System.out.println("updated " + updatedDay.getTaskKey(t));
 					}
+					index.increment();
 				}
-				time.increment();
-			}
-			days.replace(task.getStartDate(), day);
+			}*/
+			days.replace(task.getStartDate(), updatedDay);
 		}
 	}
-	
-	private Day replace(Day day, Time t, double key) throws Exception {
-		double tempKey = day.getTaskKey(t);
-		day.removeTaskKey(new Time(t));
-		day.addTaskToDay(new Time(t), key);
-		t.increment();
-		if (!day.containsKey(t)) {
-			day.addTaskToDay(t, tempKey);
-			return day;
-		}
-		else {
-			return replace(day, t, tempKey);
-		}
-	}
-	
-	private void addToDay(Task task) throws Exception {
+
+
+	private void addToDay(Task task) {
 		ArrayList<Double> fifteensPerDay = task.getFifteensPerDay();
 		LocalDate startDate = task.getStartDate();
 		int daysTillDue = (int) task.getDaysTillDue();
+		Log.d("Controller", "getting ready to add to day");
 		for (int d = 0; d <= daysTillDue; d++) {
 			for (double numFifteens = 0; numFifteens < fifteensPerDay.get(d); numFifteens++) {
 				if (days.containsKey(startDate)) {
 					Day day = days.get(startDate);
 					for(Time t : Day.allTimes) {
-						if (!day.containsKey(t)) {
-							day.addTaskToDay(t, task.getKey());
+						if (day.getTaskKey(t) == 0.0) {
+							day.replace(t, task.getKey());
 							days.replace(startDate, day);
 							days.replace(startDate, priorityReschedule(startDate));
 							break;
@@ -123,8 +141,8 @@ public class Controller extends Application {
 				else {
 					Day day = new Day();
 					for(Time t : Day.allTimes) {
-						if (!day.containsKey(t)) {
-							day.addTaskToDay(t, task.getKey());
+						if (day.getTaskKey(t) == 0.0) {
+							day.replace(t, task.getKey());
 							break;
 						}
 					}
@@ -133,111 +151,148 @@ public class Controller extends Application {
 			}
 			startDate = startDate.plusDays(1);
 		}
+		Log.d("Controller", "added to day");
 	}
-	
-	/*
-	public void getTaskFromDay(LocalDate date) {
-		Day day = days.get(date);
-		for (Time name: day.keySet()){
-            String key = name.toString();
-            Double value = day.getTaskKey(name);  
-            System.out.println(key + " " + value);  
-		} 
-	}
-	
-	
-	public Task[] getTaskFromDay(LocalDate date) {
-		Day day = days.get(date);
-		Collection<Double> taskKeys = day.getCollection();
-		Task[] tasksInDay = new Task[96];
-		int index = 0;
-		for (double key : taskKeys) {
-			tasksInDay[index] = tasks.get(key);
-			index++;
-		}
-		return tasksInDay;
-	}*/
-	
+
 	/**
-	 * gets all the tasks in a day 
+	 * prints all the tasks in a day
 	 * @param date
 	 */
-	
-	public void getTaskFromDay(LocalDate date) {
+
+	public String[] getTaskFromDayList(LocalDate date) {
 		Day day = days.get(date);
+		String[] taskss = new String[day.getSize()];
+		int index = 0;
 		for (Time time : Day.allTimes) {
-			if (day.containsKey(time)) {
-				System.out.println(time + " - " + tasks.get(day.getTaskKey(time)));
-			}
-			else if (time.equals(new Time(23, 45))) {
+			if (time.equals(new Time(23, 45))) {
+				if (day.getTaskKey(time) == 0) {
+					taskss[index] = "";
+				}
+				else {
+					taskss[index] = tasks.get(day.getTaskKey(time)).toString();
+				}
 				break;
+			}
+			else if (day.containsKey(time)) {
+				if (day.getTaskKey(time) == 0) {
+					taskss[index] = "";
+				}
+				else {
+					taskss[index] = tasks.get(day.getTaskKey(time)).toString();
+				}
 			}
 			else {
 				continue;
 			}
+			index++;
 		}
+		return taskss;
 	}
 
-	
-	/*public ArrayList<Task> getTaskFromDay(LocalDate date) {
-		Day day = days.get(date);
-		double[] taskKeysInDay = day.getDay();
-		ArrayList<Task> tasksInDay = new ArrayList<Task>();
-		for (double key : taskKeysInDay) {
-			tasksInDay.add(tasks.get(key));
-		}
-		return tasksInDay;
-	}*/
-
-	/*public void removeTask(TaskOld task) {
-		LocalDate startDate = task.getStartDate();
-		double daysTillDue = task.getDaysTillDue();
-		for (int d = 0; d <= daysTillDue; d++) {
-			DayOld day = days.get(startDate);
-			for (int i = 0; i < day.getDay().length; i++) {
-				double[] dayList = day.getDay();
-				if (dayList[i] == task.getKey()) {
-					day.setIndex(i, 0);
-					days.replace(startDate, day);
-					days.replace(startDate, priorityReschedule(startDate));
-				}
-			}
-			startDate.plusDays(1);
-		}
-		tasks.remove(task.getKey());
-	}
-	
-	private void checkOverflow () {
-		
-	}*/
-	
 	private Day priorityReschedule(LocalDate today) {
+		Log.d("controller", "in priority schedule");
 		Day day = days.get(today);
 		boolean sorted = false;
-	    double temp;
-	    while(!sorted) {
-	        sorted = true;
-	        for (int i = 0; i < day.getSize() - 1; i++) {
-	        	if (!day.containsKey(Day.allTimes.get(i)) || !day.containsKey(Day.allTimes.get(i+1))) {
-	        		continue;
-	        	}
-	        	else if (tasks.get(day.getTaskKey(Day.allTimes.get(i))).getCurrentDaysTillDue(today) > tasks.get(day.getTaskKey(Day.allTimes.get(i+1))).getCurrentDaysTillDue(today)) {
-	        		temp = day.getTaskKey(Day.allTimes.get(i));
-		            day.replace(Day.allTimes.get(i), day.getTaskKey(Day.allTimes.get(i+1)));
-		            day.replace(Day.allTimes.get(i+1), temp);
-		            sorted = false;
-		        }
-	        }
-	    }
-	    return day;
-	}
-	
-	/*private boolean compareTo(Task task1, Task task2) {
-		double daysTillDue1 = task1.getCurrentDaysTillDue();
-		double daysTillDue2 = task2.getCurrentDaysTillDue();
-		if (daysTillDue1 > daysTillDue2) {
-			return true;
+		double temp;
+		while(!sorted) {
+			sorted = true;
+			for (int i = 0; i < day.getSize() - 1; i++) {
+				if (day.getTaskKey(Day.allTimes.get(i)) == 0.0 || day.getTaskKey(Day.allTimes.get(i+1)) == 0.0) {
+					continue;
+				}
+				else if (tasks.get(day.getTaskKey(Day.allTimes.get(i))).getCurrentDaysTillDue(today) > tasks.get(day.getTaskKey(Day.allTimes.get(i+1))).getCurrentDaysTillDue(today)) {
+					temp = day.getTaskKey(Day.allTimes.get(i));
+					day.replace(Day.allTimes.get(i), day.getTaskKey(Day.allTimes.get(i+1)));
+					day.replace(Day.allTimes.get(i+1), temp);
+					sorted = false;
+				}
+			}
 		}
-		return false;
+		Log.d("controller", "out of priority schedule");
+		return day;
+	}
+
+	/*public void saveSchedule() {
+		try {
+			FileWriter outputfile = new FileWriter(schedulesFile, true);
+			BufferedWriter br = new BufferedWriter(outputfile);
+			// create CSVWriter object filewriter object as parameter
+			CSVWriter writer = new CSVWriter(br);
+			for (LocalDate date: days.keySet()) {
+				String[] scheduleData = new String[99];
+				scheduleData[0] = Integer.toString(date.getYear());
+				scheduleData[1] = Integer.toString(date.getMonthValue());
+				scheduleData[2] = Integer.toString(date.getDayOfMonth());
+				Day day = days.get(date);
+				int index = 3;
+				for (Time time : Day.allTimes) {
+					if (time.equals(new Time(23, 45))) {
+						scheduleData[index] = Double.toString(day.getTaskKey(time));
+						break;
+					}
+					else if (day.containsKey(time)) {
+						scheduleData[index] = Double.toString(day.getTaskKey(time));        			}
+					index++;
+				}
+				writer.writeNext(scheduleData);
+			}
+			// closing writer connection
+			writer.close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*public void recreate() throws IOException {
+		recreateBlockedTasks();
+		recreateTasks();
+		recreateSchedule();
+	}
+
+	private void recreateTasks() throws IOException {
+		FileReader fr = new FileReader("src\\tasks.csv");
+		BufferedReader br = new BufferedReader(fr);
+		String taskData = "";
+
+        try {
+        	br.readLine();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+
+	private void recreateBlockedTasks() throws IOException {
+		FileReader fr = new FileReader("src\\blockedtasks.csv");
+		BufferedReader br = new BufferedReader(fr);
+		String blockedTaskData = "";
+
+        try {
+        	br.readLine();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FileWriter fw = new FileWriter("src\\blockedtasks.csv", false);
+        fw.close();
+
+	}
+
+	private void recreateSchedule() throws IOException {
+		FileReader fr = new FileReader("src\\schedules.csv");
+		BufferedReader br = new BufferedReader(fr);
+		String schedule = "";
+
+        try {
+        	br.readLine();
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 	}*/
+
 }
+;

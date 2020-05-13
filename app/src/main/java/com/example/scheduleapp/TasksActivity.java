@@ -60,13 +60,13 @@ public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapt
 
     public void goToSchedule(View v) throws Exception {
         Controller aController = (Controller) getApplicationContext();
+        Log.d("TasksActivity", "getting ready to create task");
+        for(TaskDisplay task: list){
+            aController.createTask(task.getTaskName(), Double.valueOf(task.getHours()), Integer.valueOf(task.getDays()), true);
+        }
 
-        /*for(TaskDisplay task: list){
-            aController.createTask(task.getTaskName(), Double.valueOf(task.getHours()), Integer.valueOf(task.getDays()));
-        }*/
-
-        //aController.createTask("math", 3.0, 2);
-
+        //aController.createTask("math", 20, 10, true);
+        Log.d("TasksActivity", "task created");
         Toast.makeText(getApplicationContext(), "Scheduled tasks",Toast.LENGTH_LONG).show();
 
         list.clear();

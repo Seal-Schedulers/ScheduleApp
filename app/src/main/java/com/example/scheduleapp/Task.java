@@ -1,5 +1,7 @@
 package com.example.scheduleapp;
 
+import android.util.Log;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -30,7 +32,9 @@ public class Task {
         this.daysTillDue = daysTillDue;
         this.key = key;
         this.block = false;
+        Log.d("Task", "about to start Time algorithm");
         fifteensPerDay = amountPerDay(fifteens(hrs), daysTillDue, fifteensPerDay);
+        Log.d("Task", "done with Time algorithm");
         this.startDate = startDate;
     }
 
@@ -109,15 +113,23 @@ public class Task {
     }
 
     private static ArrayList<Double> amountPerDay(double fifteens, double daysTillDue, ArrayList<Double> fifteensPerDay) {
-        double total = integral(0, 4, x -> {
+        Log.d("Task", "getting into integral");
+        /*double total = integral(0, 4, x -> {
             return (1/Math.sqrt(2*Math.PI))*(Math.pow(Math.E,-(Math.pow(x-2, 2)/2)));
-        });
+        });*/
+        double total = 0.954499736;
+        Log.d("Task", "total" + total);
         double plusNextDay = 4/(daysTillDue+1);
+        Log.d("Task", "finished integral, about loop");
+        Log.d("Task", "daysTillDue "+daysTillDue);
         for (int i = 1; i <= daysTillDue+1; i++) {
+            Log.d("Task", "in loop, calling integral function");
             double hrsToday = integral(plusNextDay*(i-1), plusNextDay*i, x -> {
                 return (1/Math.sqrt(2*Math.PI))*(Math.pow(Math.E,-(Math.pow(x-2, 2)/2)));
             });
+            Log.d("Task", "hrsToday " + hrsToday);
             //hrsPerDay.add(hrsToday/total);
+            Log.d("Task","fifteens add " + (double) Math.round(hrsToday/total*fifteens));
             fifteensPerDay.add((double) Math.round(hrsToday/total*fifteens));
             //hrsPerDay.add((hrsToday/total*hrs));
         }
@@ -134,6 +146,7 @@ public class Task {
                 fifteensPerDay.set((int) Math.floor(fifteensPerDay.size()/2), Math.floor(fifteensPerDay.get(fifteensPerDay.size()/2))-1);
             }
         }
+        Log.d("task", "done creating fifteensPerDay");
         return fifteensPerDay;
     }
 
