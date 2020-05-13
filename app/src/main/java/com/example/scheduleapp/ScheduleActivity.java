@@ -37,12 +37,21 @@ public class ScheduleActivity extends AppCompatActivity {
         Controller aController = (Controller) getApplicationContext();
         Log.d("ScheduleActivity", "past the the controller!");
 
-        /*ListView scheduleDisplay =(ListView)findViewById(R.id.scheduleDisplayList);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, aController.getTaskFromDayList(LocalDate.of(year, month, dayOfMonth)));
-        scheduleDisplay.setAdapter(adapter);*/
-        for(String s : aController.getTaskFromDayList(LocalDate.of(2020, 5, 13))) {
-            Log.d("ScheduleActivity", s);
-        }
+        ArrayList<String> items = new ArrayList<String>();
+        items.add("apples");
+        items.add("bananas");
+        items.add("strawberries");
+
+        ListView scheduleDisplay =(ListView)findViewById(R.id.scheduleDisplayList);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        scheduleDisplay.setAdapter(adapter);
+        /*Log.d("ScheduleActivity", "entering the loop");
+        if (aController.getDaysHashMap().containsKey(today)){
+            Log.d("ScheduleActivity", "in the loop");
+            for(String s : aController.getTaskFromDayList(LocalDate.of(year,month,dayOfMonth))) {
+                Log.d("ScheduleActivity", "done");
+            }
+        }*/
 
     }
 

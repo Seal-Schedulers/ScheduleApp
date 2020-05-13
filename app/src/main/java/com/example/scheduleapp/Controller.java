@@ -40,6 +40,10 @@ public class Controller extends Application{
 	}
 
 	// Methods
+	public HashMap<LocalDate, Day> getDaysHashMap(){
+		return days;
+	}
+
 	/**
 	 * creates a task object using the Task class
 	 * @param name
