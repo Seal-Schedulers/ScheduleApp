@@ -21,6 +21,11 @@ public class RemoveActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: called");
     }
 
+    /**
+     * removes the tasks from the task list in the TasksActivity and
+     * returns to the TasksActivity
+     * @param v
+     */
     public void yesButton (View v) {
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", -1);
@@ -31,6 +36,10 @@ public class RemoveActivity extends AppCompatActivity {
         startActivity(newIntent);
     }
 
+    /**
+     * goes to the TasksActivity
+     * @param v
+     */
     public void noButton (View v) {
         Intent intent = new Intent(this, TasksActivity.class);
         startActivity(intent);

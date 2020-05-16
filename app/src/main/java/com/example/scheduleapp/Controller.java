@@ -4,31 +4,13 @@ import android.app.Application;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.scheduleapp.Day;
-import com.example.scheduleapp.Time;
-import com.example.scheduleapp.Task;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.util.*;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.*;
-
-import com.opencsv.CSVWriter;
 
 public class Controller extends Application{
-
-	//File tasksFile = new File("src\\tasks.csv");
-	//File schedulesFile = new File("src\\schedules.csv");
-	//File blockedtasksFile = new File("src\\blockedtasks.csv");
 
 	// Data
 	private HashMap<Double, Task> tasks;
@@ -48,11 +30,13 @@ public class Controller extends Application{
 	}
 
 	/**
-	 * creates a task object using the Task class
+	 * creates a task object using the Task class,
+	 * adds it to the tasks map, and adds to the appropriate days
 	 * @param name
 	 * @param hrs
 	 * @param daysTillDue
-	 * @
+	 * @param append
+	 * @param date
 	 */
 	public void createTask(String name, double hrs, int daysTillDue, boolean append, LocalDate date)   {
 		Log.d("Controller", "about to call LocalDate");
@@ -83,6 +67,15 @@ public class Controller extends Application{
 		reference += 0.1;
 	}
 
+	/**
+	 * creates a blocked task object using the Task class,
+	 * adds it to the tasks map, and adds to the appropriate day
+	 * @param name
+	 * @param start
+	 * @param end
+	 * @param append
+	 * @param date
+	 */
 	public void createBlockTask(String name, Time start, Time end, boolean append, LocalDate date)   {
 		LocalDate today = date;
 		Task task = new Task(name, start, end, reference, today);
@@ -110,6 +103,10 @@ public class Controller extends Application{
 		reference += 0.1;
 	}
 
+	/**
+	 * inputs the block task key into the time slot for its specific day
+	 * @param task
+	 */
 	private void blockTimeInDay(Task task) {
 		if(!days.containsKey(task.getStartDate())) {
 			Day day = new Day();
@@ -161,7 +158,11 @@ public class Controller extends Application{
 		}*/
 	}
 
-
+	/**
+	 * inputs the task key into the appropriate days based on
+	 * the time allotted per day
+	 * @param task
+	 */
 	private void addToDay(Task task) {
 		ArrayList<Double> fifteensPerDay = task.getFifteensPerDay();
 		LocalDate startDate = task.getStartDate();
@@ -199,10 +200,9 @@ public class Controller extends Application{
 	}
 
 	/**
-	 * prints all the tasks in a day
+	 * creates a list with all the tasks and times in a day
 	 * @param date
 	 */
-
 	public String[] getTaskFromDayList(LocalDate date) {
 		Day day = days.get(date);
 		String[] taskss = new String[day.getSize()];
@@ -233,6 +233,11 @@ public class Controller extends Application{
 		return taskss;
 	}
 
+	/**
+	 * sorts the schedule based on proximity of the due date using
+	 * bubble sort
+	 * @param today
+	 */
 	private Day priorityReschedule(LocalDate today) {
 		Log.d("controller", "in priority schedule");
 		Day day = days.get(today);
@@ -255,88 +260,4 @@ public class Controller extends Application{
 		Log.d("controller", "out of priority schedule");
 		return day;
 	}
-
-	/*public void saveSchedule() {
-		try {
-			FileWriter outputfile = new FileWriter(schedulesFile, true);
-			BufferedWriter br = new BufferedWriter(outputfile);
-			// create CSVWriter object filewriter object as parameter
-			CSVWriter writer = new CSVWriter(br);
-			for (LocalDate date: days.keySet()) {
-				String[] scheduleData = new String[99];
-				scheduleData[0] = Integer.toString(date.getYear());
-				scheduleData[1] = Integer.toString(date.getMonthValue());
-				scheduleData[2] = Integer.toString(date.getDayOfMonth());
-				Day day = days.get(date);
-				int index = 3;
-				for (Time time : Day.allTimes) {
-					if (time.equals(new Time(23, 45))) {
-						scheduleData[index] = Double.toString(day.getTaskKey(time));
-						break;
-					}
-					else if (day.containsKey(time)) {
-						scheduleData[index] = Double.toString(day.getTaskKey(time));        			}
-					index++;
-				}
-				writer.writeNext(scheduleData);
-			}
-			// closing writer connection
-			writer.close();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/*public void recreate() throws IOException {
-		recreateBlockedTasks();
-		recreateTasks();
-		recreateSchedule();
-	}
-
-	private void recreateTasks() throws IOException {
-		FileReader fr = new FileReader("src\\tasks.csv");
-		BufferedReader br = new BufferedReader(fr);
-		String taskData = "";
-
-        try {
-        	br.readLine();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
-
-	private void recreateBlockedTasks() throws IOException {
-		FileReader fr = new FileReader("src\\blockedtasks.csv");
-		BufferedReader br = new BufferedReader(fr);
-		String blockedTaskData = "";
-
-        try {
-        	br.readLine();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        FileWriter fw = new FileWriter("src\\blockedtasks.csv", false);
-        fw.close();
-
-	}
-
-	private void recreateSchedule() throws IOException {
-		FileReader fr = new FileReader("src\\schedules.csv");
-		BufferedReader br = new BufferedReader(fr);
-		String schedule = "";
-
-        try {
-        	br.readLine();
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-	}*/
-
 }
-;

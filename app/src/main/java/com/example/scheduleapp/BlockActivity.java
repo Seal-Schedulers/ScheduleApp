@@ -1,23 +1,20 @@
 package com.example.scheduleapp;
 
-import androidx.annotation.LongDef;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BlockActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
+    //data
     private Time startTime;
     private Time endTime;
     private ArrayList<Time> dayTimes = new ArrayList<>();{
@@ -29,6 +26,10 @@ public class BlockActivity extends AppCompatActivity implements AdapterView.OnIt
         while(!time.equals(new Time(0,0)));
     }
 
+    /**
+     * oncreate, fills the spinners with all the times in the day
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,10 @@ public class BlockActivity extends AppCompatActivity implements AdapterView.OnIt
         endTimes.setOnItemSelectedListener(this);
     }
 
+    /**
+     * blocks the time based on the user's inputs
+     * @param v
+     */
     public void blockTime(View v) {
         Controller aController = (Controller) getApplicationContext();
         EditText blockNameText = findViewById(R.id.blockedActivityName);
@@ -71,6 +76,14 @@ public class BlockActivity extends AppCompatActivity implements AdapterView.OnIt
         startActivity(intent);
     }
 
+    /**
+     * when a time is selected on the spinners, it will set the startTime and
+     * endTime to those selected times
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Spinner time1 = (Spinner)parent;

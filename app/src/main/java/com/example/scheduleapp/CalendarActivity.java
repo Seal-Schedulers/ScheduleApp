@@ -16,6 +16,11 @@ public class CalendarActivity extends AppCompatActivity {
     private static final String TAG = "CalendarActivity";
     private CalendarView calendar;
 
+    /**
+     * oncreate, a calendar is displayed that goes to
+     * the schedule for each date when clicked
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,10 @@ public class CalendarActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * goes to the TaskActivity
+     * @param v
+     */
     public void goToTasks(View v) {
         Intent intent = new Intent(CalendarActivity.this, CreateActivity.class);
         startActivity(intent);

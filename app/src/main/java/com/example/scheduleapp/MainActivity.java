@@ -17,6 +17,10 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * reloads all previous information when opening the app
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,17 +30,28 @@ public class MainActivity extends AppCompatActivity {
         readTaskFile();
     }
 
+    /**
+     * goes to TasksActivity
+     * @param v
+     */
     public void goToMyTasks(View v) {
         Intent intent = new Intent(this, TasksActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * goes to CalendarActivity
+     * @param v
+     */
     public void goToSchedule(View v) {
         Intent intent = new Intent(this, CalendarActivity.class);
         startActivity(intent);
     }
 
-    public void readBlockedTaskFile() {
+    /**
+     * reads and creates the blocked tasks from previous data
+     */
+    private void readBlockedTaskFile() {
         try {
             FileInputStream fileInputStream = openFileInput("blockedTask.csv");
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
@@ -64,7 +79,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void readTaskFile() {
+    /**
+     * reads and creates the tasks from previous data
+     */
+    private void readTaskFile() {
         try {
             FileInputStream fileInputStream = openFileInput("task.csv");
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);

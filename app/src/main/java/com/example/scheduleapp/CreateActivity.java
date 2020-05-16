@@ -12,46 +12,16 @@ import java.util.ArrayList;
 
 public class CreateActivity extends AppCompatActivity {
 
-    //Here you can put the data. In this case all we need as an ArrayList of String arrays that will hold the tasks.
-    //You can call it TaskHolder or something
-
-    ArrayList<String[]> TaskHolder = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
     }
-    //You don't necessarily need these following three methods because although they retrieve the data from the user,
-    //it converts the strings into doubles which isn't needed. Don't delete them yet, just comment them out - we never know, we
-    //might need them later.
-    private String getTaskNameText() {
-        EditText taskNameText = findViewById(R.id.inputTaskName);
-        String taskName = taskNameText.getText().toString();
-        return taskName;
-    }
 
-    private double getHours() {
-        EditText hoursText = findViewById(R.id.inputHours);
-        String hoursStr = hoursText.getText().toString();
-        if (hoursStr.isEmpty())
-            hoursStr = "0";
-        double hoursNum = Double.parseDouble(hoursStr);
-        return hoursNum;
-    }
-
-    private int getDaysTillDue() {
-        EditText daysTillDueText = findViewById(R.id.inputDaysTillDue);
-        String daysTillDueStr = daysTillDueText.getText().toString();
-        if (daysTillDueStr.isEmpty())
-            daysTillDueStr = "0";
-        int daysTillDueNum = Integer.parseInt(daysTillDueStr);
-        return daysTillDueNum;
-    }
-
-    //As I mentioned above, you shouldn't use the methods above in this method because it makes them from String to double and
-    //all you are doing here is converting them back to String. Instead retrieve them directly as Strings in this method. It
-    //will save the extra step. Create a String array with the name, hours, and daysTillDue and put it in the ArrayList created above.
+    /**
+     * adds tasks to the recyclerview in the taskActivity
+     * @param v
+     */
     public void createTemporaryTask(View v) {
         EditText taskNameText = findViewById(R.id.inputTaskName);
         String taskName = taskNameText.getText().toString();
@@ -66,14 +36,7 @@ public class CreateActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, TasksActivity.class);
         startActivity(intent);
-        //String[] data = new String[]{LookUp,taskName, hoursStr, daysTillDueStr};
-        //TaskHolder.add(data);
 
     }
 
-    //I know I commented a lot... sorry about that hehe. Let me know if I made a mistake somewhere or if you have any questions
-    //about what I said.
-
-    //In the method below, it will go through the ArrayList of arrays and input them into the createTask from the Controller
-    //class. This will then be saved in the csv files.
 }

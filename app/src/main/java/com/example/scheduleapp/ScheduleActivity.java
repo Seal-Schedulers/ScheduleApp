@@ -17,6 +17,10 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private android.widget.Toast Toast;
 
+    /**
+     * displays the tasks for a user selected date
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,10 @@ public class ScheduleActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * goes to the CalendarActivity
+     * @param v
+     */
     public void goToCalendar(View v) {
         Intent intent = new Intent(this, CalendarActivity.class);
         startActivity(intent);

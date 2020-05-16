@@ -27,6 +27,9 @@ public class Day {
 		}
 	}
 
+	/**
+	 * getter and setter methods
+	 */
 	public void addTaskToDay(Time time, double value) {
 		day.put(time, value);
 	}
