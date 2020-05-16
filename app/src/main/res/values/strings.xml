@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ScheduleApp</string>
+    <string name="app_name">QuikSked</string>
     <string name="myTasksButton">My Tasks</string>
     <string name="scheduleButton">Schedule</string>
     <string name="title_activity_tasks">TasksActivity</string>

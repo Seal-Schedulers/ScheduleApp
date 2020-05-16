@@ -32,27 +32,30 @@ public class ScheduleActivity extends AppCompatActivity {
         String date = (month+1) + "/" + dayOfMonth + "/" + year;
 
         Toast.makeText(getApplicationContext(), date,Toast.LENGTH_LONG).show();
+        Log.d("ScheduleActivity", "date: "+ (month+1) + "/" + dayOfMonth + "/" + year);
 
         Log.d("ScheduleActivity", "getting all tasks for today");
         Controller aController = (Controller) getApplicationContext();
         Log.d("ScheduleActivity", "past the the controller!");
 
-        ArrayList<String> items = new ArrayList<String>();
+        /*ArrayList<String> items = new ArrayList<String>();
         items.add("apples");
         items.add("bananas");
-        items.add("strawberries");
+        items.add("strawberries");*/
 
         ListView scheduleDisplay =(ListView)findViewById(R.id.scheduleDisplayList);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        scheduleDisplay.setAdapter(adapter);
-        /*Log.d("ScheduleActivity", "entering the loop");
+        Log.d("ScheduleActivity", "entering the loop");
+        Log.d("ScheduleActivity", today.toString());
+        Log.d("ScheduleActivity", aController.getDaysHashMap().toString());
         if (aController.getDaysHashMap().containsKey(today)){
             Log.d("ScheduleActivity", "in the loop");
-            for(String s : aController.getTaskFromDayList(LocalDate.of(year,month,dayOfMonth))) {
-                Log.d("ScheduleActivity", "done");
-            }
-        }*/
-
+            String[] items = aController.getTaskFromDayList(LocalDate.of(year,month+1, dayOfMonth));
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+            scheduleDisplay.setAdapter(adapter);
+        }
+        else {
+            Log.d("ScheduleActivity", "false");
+        }
     }
 
     public void goToCalendar(View v) {

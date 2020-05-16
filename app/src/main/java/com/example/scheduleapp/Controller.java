@@ -127,11 +127,13 @@ public class Controller extends Application{
 	private void addToDay(Task task) {
 		ArrayList<Double> fifteensPerDay = task.getFifteensPerDay();
 		LocalDate startDate = task.getStartDate();
+		Log.d("Controller", "in method" + startDate.toString());
 		int daysTillDue = (int) task.getDaysTillDue();
 		Log.d("Controller", "getting ready to add to day");
 		for (int d = 0; d <= daysTillDue; d++) {
 			for (double numFifteens = 0; numFifteens < fifteensPerDay.get(d); numFifteens++) {
 				if (days.containsKey(startDate)) {
+					Log.d("Controller", "in the loop" + startDate.toString());
 					Day day = days.get(startDate);
 					for(Time t : Day.allTimes) {
 						if (day.getTaskKey(t) == 0.0) {
@@ -173,7 +175,7 @@ public class Controller extends Application{
 					taskss[index] = "";
 				}
 				else {
-					taskss[index] = tasks.get(day.getTaskKey(time)).toString();
+					taskss[index] = time.toString() + " - " + tasks.get(day.getTaskKey(time)).toString().toLowerCase();
 				}
 				break;
 			}
@@ -182,7 +184,7 @@ public class Controller extends Application{
 					taskss[index] = "";
 				}
 				else {
-					taskss[index] = tasks.get(day.getTaskKey(time)).toString();
+					taskss[index] = time.toString() + " - " + tasks.get(day.getTaskKey(time)).toString().toLowerCase();
 				}
 			}
 			else {
