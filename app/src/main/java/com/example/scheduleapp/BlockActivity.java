@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -53,7 +54,19 @@ public class BlockActivity extends AppCompatActivity implements AdapterView.OnIt
 
     public void blockTime(View v) {
         Controller aController = (Controller) getApplicationContext();
-        aController.createBlockTask("hello", startTime, endTime, true, LocalDate.now());
+        EditText blockNameText = findViewById(R.id.blockedActivityName);
+        String blockName = blockNameText.getText().toString();
+
+        EditText blockYearText = findViewById(R.id.inputDateYear);
+        int blockYear = Integer.parseInt(blockYearText.getText().toString());
+
+        EditText blockMonthText = findViewById(R.id.inputDateMonth);
+        int blockMonth = Integer.parseInt(blockMonthText.getText().toString());
+
+        EditText blockDayText = findViewById(R.id.inputDateDay);
+        int blockDay = Integer.parseInt(blockDayText.getText().toString());
+
+        aController.createBlockTask(blockName, startTime, endTime, true, LocalDate.of(blockYear, blockMonth, blockDay));
         Intent intent = new Intent(this, ScheduleActivity.class);
         startActivity(intent);
     }

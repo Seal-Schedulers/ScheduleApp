@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //readBlockedTaskFile();
+        Log.d("MainActivity", "About to reload old information");
+        readBlockedTaskFile();
         readTaskFile();
     }
 
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     String[] cells = cellsOfLines.split(",");
                     Log.d("MainActivity", Arrays.toString(cells));
                     Controller aController = (Controller) getApplicationContext();
-                    aController.createBlockTask(cells[0], new Time(Integer.parseInt(cells[1]), Integer.parseInt(cells[2])), new Time(Integer.parseInt(cells[3]), Integer.parseInt(cells[3])), false, LocalDate.of(Integer.parseInt(cells[4]), Integer.parseInt(cells[5]), Integer.parseInt(cells[6])));
+                    aController.createBlockTask(cells[0], new Time(Integer.parseInt(cells[1]), Integer.parseInt(cells[2])), new Time(Integer.parseInt(cells[3]), Integer.parseInt(cells[4])), false, LocalDate.of(Integer.parseInt(cells[5]), Integer.parseInt(cells[6]), Integer.parseInt(cells[7])));
                     Log.d("MainActivity", "recreated old blocked task");
                 }
             }
