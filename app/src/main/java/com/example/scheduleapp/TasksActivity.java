@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapter.OnNoteListener{
@@ -62,7 +63,7 @@ public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapt
         Controller aController = (Controller) getApplicationContext();
         Log.d("TasksActivity", "getting ready to create task");
         for(TaskDisplay task: list){
-            aController.createTask(task.getTaskName(), Double.valueOf(task.getHours()), Integer.valueOf(task.getDays()), true);
+            aController.createTask(task.getTaskName(), Double.valueOf(task.getHours()), Integer.valueOf(task.getDays()), true, LocalDate.now());
         }
 
         //aController.createTask("math", 20, 10, true);

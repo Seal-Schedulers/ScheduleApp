@@ -2,11 +2,14 @@ package com.example.scheduleapp;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.scheduleapp.Day;
 import com.example.scheduleapp.Time;
 import com.example.scheduleapp.Task;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -51,24 +54,59 @@ public class Controller extends Application{
 	 * @param daysTillDue
 	 * @
 	 */
-	public void createTask(String name, double hrs, int daysTillDue, boolean append)   {
+	public void createTask(String name, double hrs, int daysTillDue, boolean append, LocalDate date)   {
 		Log.d("Controller", "about to call LocalDate");
-		LocalDate today = LocalDate.now();
+		LocalDate today = date;
 		Log.d("Controller", "done with LocalDate");
 		Task task = new Task(name, hrs, daysTillDue, reference, today);
 		Log.d("Controller", "going to add to hashmap");
 		tasks.put(reference, task);
 		Log.d("Controller", "done adding to hashmap");
 		addToDay(task);
+		if (append) {
+			String taskToSave = name + "," + hrs + "," + daysTillDue + "," + today.getYear() + "," + today.getMonthValue() + "," + today.getDayOfMonth();
+			Log.d("writing", taskToSave);
+
+			try {
+				FileOutputStream fileOutputStream = openFileOutput("task.csv", MODE_APPEND);
+				fileOutputStream.write(taskToSave.getBytes());
+				fileOutputStream.write(";".getBytes());
+				fileOutputStream.close();
+
+				Toast.makeText(getApplicationContext(), "Task Saved", Toast.LENGTH_SHORT).show();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		reference += 0.1;
 	}
 
-	public void createBlockTask(String name, Time start, Time end, boolean append)   {
-		LocalDate today = LocalDate.now();
+	public void createBlockTask(String name, Time start, Time end, boolean append, LocalDate date)   {
+		LocalDate today = date;
 		Task task = new Task(name, start, end, reference, today);
 		tasks.put(reference, task);
 		blockTimeInDay(task);
-		System.out.println(reference + " " + tasks.get(reference));
+		//System.out.println(reference + " " + tasks.get(reference));
+		if(append) {
+			String blockTaskToSave = name + "," + start.getHour() + "," + start.getMinute() + "," + end.getHour() + "," + end.getMinute() + "," + today.getYear() + "," + today.getMonthValue() + "," + today.getDayOfMonth();
+			Log.d("writing", blockTaskToSave);
+
+			try {
+				FileOutputStream fileOutputStream = openFileOutput("blockedTask.csv", MODE_APPEND);
+				fileOutputStream.write(blockTaskToSave.getBytes());
+				fileOutputStream.write(";".getBytes());
+				fileOutputStream.close();
+
+				Toast.makeText(getApplicationContext(), "Blocked Task Saved", Toast.LENGTH_SHORT).show();
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		reference += 0.1;
 	}
 
@@ -89,7 +127,7 @@ public class Controller extends Application{
 			}
 			days.put(task.getStartDate(), day);
 		}
-		else {
+		/*else {
 			Day day = days.get(task.getStartDate());
 			Day updatedDay = new Day();
 			Time time = new Time(task.getStart());
@@ -119,8 +157,8 @@ public class Controller extends Application{
 					index.increment();
 				}
 			}*/
-			days.replace(task.getStartDate(), updatedDay);
-		}
+			/*days.replace(task.getStartDate(), updatedDay);
+		}*/
 	}
 
 

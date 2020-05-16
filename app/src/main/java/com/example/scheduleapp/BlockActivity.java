@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BlockActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -51,6 +52,8 @@ public class BlockActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     public void blockTime(View v) {
+        Controller aController = (Controller) getApplicationContext();
+        aController.createBlockTask("hello", startTime, endTime, true, LocalDate.now());
         Intent intent = new Intent(this, ScheduleActivity.class);
         startActivity(intent);
     }
