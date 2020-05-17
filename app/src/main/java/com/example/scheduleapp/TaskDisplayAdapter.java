@@ -8,8 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.scheduleapp.TaskDisplay;
-
 import java.util.ArrayList;
 
 public class TaskDisplayAdapter extends RecyclerView.Adapter<TaskDisplayAdapter.ViewHolder> {

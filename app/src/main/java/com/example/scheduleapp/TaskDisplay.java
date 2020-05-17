@@ -1,20 +1,24 @@
 package com.example.scheduleapp;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 public class TaskDisplay {
+    //Data
     private String taskName;
     private String hours;
     private String days;
 
+    /**
+     * constructs a taskDisplay object
+     * @param taskName: the name of the task
+     * @param hours: the total hours required for the task
+     * @param days: the number of days until the task is due
+     */
     public TaskDisplay(String taskName, String hours, String days) {
         this.taskName = taskName;
         this.hours = hours;
         this.days = days;
     }
 
-
+    //getter and setter methods
     public String getTaskName() {
         return taskName;
     }
