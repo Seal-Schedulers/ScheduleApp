@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapter.OnNoteListener{
 
+    //Data
     private static final String TAG = "TasksActivity";
     private RecyclerView tasksToDisplay;
     static RecyclerView.Adapter adapter;
@@ -35,6 +36,10 @@ public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapt
         this.tasksToDisplay.setAdapter(adapter);
     }
 
+    /**
+     * redirects to RemoveActivity with the position of
+     * the object in the RecyclerView
+     */
     @Override
     public void onNoteClick(int position) {
         Log.d(TAG, "onNoteClick: clicked");
@@ -44,21 +49,34 @@ public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapt
         startActivity(intent);
     }
 
+    /**
+     * redirects to CreateActivity
+     */
     public void goToCreateTask(View v) {
         Intent intent = new Intent(this, CreateActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * redirects to BlockTime
+     */
     public void goToBlockTime(View v) {
         Intent intent = new Intent(this, BlockActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * redirects to CalendarActivity
+     */
     public void goToCalendar(View v) {
         Intent intent = new Intent(this, CalendarActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * schedules all the tasks in the list of TaskDisplay objects
+     * redirects to the schedule for today
+     */
     public void goToSchedule(View v) throws Exception {
         Controller aController = (Controller) getApplicationContext();
         Log.d("TasksActivity", "getting ready to create task");
@@ -76,12 +94,4 @@ public class TasksActivity extends AppCompatActivity implements TaskDisplayAdapt
         Intent intent = new Intent(this, ScheduleActivity.class);
         startActivity(intent);
     }
-
-    public void goToMain(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-
-
 }

@@ -12,14 +12,25 @@ import java.util.ArrayList;
 
 public class TaskDisplayAdapter extends RecyclerView.Adapter<TaskDisplayAdapter.ViewHolder> {
 
+    //data
     private ArrayList<TaskDisplay> tasksToDisplay;
     private OnNoteListener mOnNoteListener;
 
+    /**
+     * constructs a taskDisplayAdapter object
+     * @param tasksToDisplay: list of tasks to display
+     * @param onNoteListener: onclick listener
+     */
     public TaskDisplayAdapter(ArrayList<TaskDisplay> tasksToDisplay, OnNoteListener onNoteListener) {
         this.tasksToDisplay = tasksToDisplay;
         this.mOnNoteListener = onNoteListener;
     }
 
+    /**
+     * method for inflating the RecyclerView
+     * @param parent
+     * @param viewType
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,6 +39,11 @@ public class TaskDisplayAdapter extends RecyclerView.Adapter<TaskDisplayAdapter.
         return new ViewHolder(v, mOnNoteListener);
     }
 
+    /**
+     * binds the data from TaskDisplay class to the xml layout in the RecyclerView
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TaskDisplay task = tasksToDisplay.get(position);
@@ -37,6 +53,9 @@ public class TaskDisplayAdapter extends RecyclerView.Adapter<TaskDisplayAdapter.
         holder.daysStr.setText("Days Until Due: " + task.getDays());
     }
 
+    /**
+     * @return size of the taskToDisplay list
+     */
     @Override
     public int getItemCount() {
         return tasksToDisplay.size();
@@ -49,6 +68,11 @@ public class TaskDisplayAdapter extends RecyclerView.Adapter<TaskDisplayAdapter.
         public final TextView daysStr;
         OnNoteListener onNoteListener;
 
+        /**
+         * constructs a ViewHolder object
+         * @param view
+         * @param onNoteListener
+         */
         public ViewHolder(View view, OnNoteListener onNoteListener) {
             super(view);
             this.view = view;
@@ -60,6 +84,9 @@ public class TaskDisplayAdapter extends RecyclerView.Adapter<TaskDisplayAdapter.
             itemView.setOnClickListener(this);
         }
 
+        /**
+         * onClick method
+         */
         @Override
         public void onClick(View v) {
             onNoteListener.onNoteClick(getAdapterPosition());
