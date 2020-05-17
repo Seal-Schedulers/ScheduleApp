@@ -5,12 +5,15 @@
     android:id="@+id/create"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CCF2FF"
+    android:backgroundTint="#CCF2FF"
     tools:context=".CalendarActivity">
 
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#65E7FF "
         android:dateTextAppearance="@android:style/TextAppearance.Large"
         android:weekDayTextAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         app:layout_constraintBottom_toBottomOf="parent"

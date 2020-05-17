@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#FFFFFF"
+    android:background="#CCF2FF"
+    android:backgroundTint="#CCF2FF"
     tools:context=".RemoveActivity">
 
     <LinearLayout
