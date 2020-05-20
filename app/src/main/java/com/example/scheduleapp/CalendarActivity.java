@@ -54,7 +54,7 @@ public class CalendarActivity extends AppCompatActivity {
      * @param v
      */
     public void goToTasks(View v) {
-        Intent intent = new Intent(CalendarActivity.this, CreateActivity.class);
+        Intent intent = new Intent(CalendarActivity.this, TasksActivity.class);
         startActivity(intent);
     }
 }

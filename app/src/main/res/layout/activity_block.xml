@@ -74,7 +74,8 @@
                         android:id="@+id/inputDateDay"
                         android:layout_width="@dimen/third_screen"
                         android:layout_height="wrap_content"
-                        android:hint="@string/dayLabel" />
+                        android:hint="@string/dayLabel"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

@@ -24,11 +24,11 @@
 
     <Button
         android:id="@+id/createMoreTasks"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/third_screen"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:onClick="goToTasks"
-        android:text="@string/createTaskButton"
+        android:text="@string/myTasksButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/calendarView"
         app:layout_constraintStart_toStartOf="@+id/calendarView" />
